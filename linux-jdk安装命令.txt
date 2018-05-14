@@ -1,0 +1,153 @@
+2.解压配置安装jdk7.0【可以把解压后的jdk直接通过FXP工具传输到usr/lib目录下】
+# mkdir -p /usr/lib/jvm   创建jvm 目录
+# tar zxvf jdk-7u79-linux-x64.tar.gz  -C /usr/lib/jvm 解压目录
+jdk-7u79-linux-x64.tar.gz
+# mv /usr/lib/jvm/jdk1.7.0_79    /usr/lib/jvm/java7
+
+jdk1.7.0_79
+
+3、添加jdk7.0到系统环境变量
+cp /etc/profile /etc/profile.bak    #备份
+vi /etc/profile     #编辑,在最后添加下面的内容 
+
+export JAVA_HOME=/usr/lib/jvm/java7
+export JRE_HOME=${JAVA_HOME}/jre  
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib  
+export PATH=${JAVA_HOME}/bin:$PATH 
+＃　source /etc/profile 　　　#使配置文件立即生效
+
+4.删除某目录下的文件夹：cd /usr/tomcat/tomcat1
+	--进入要删除文件的上级目录：cd /usr/tomcat
+	--rm -rf tomcat1
+5.========================================================
+在home目录下有wwwroot目录，wwwroot下有sinozzz目录，即/home/wwwroot/sinozzz
+
+一、目录创建
+
+在/home/wwwroot目录下新建一个sinozzz123的文件夹
+
+mkdir /home/wwwroot/sinozzz123
+
+二、目录复制
+
+1.把/home/wwwroot/sinozzz里面的文件和文件夹等复制到home/wwwroot/sinozzz123目录下
+
+cp -a /home/wwwroot/sinozzz/* /home/wwwroot/sinozzz123
+
+2.把/home/wwwroot/sinozzz123/abc/下的文件夹和文件复制到home/wwwroot/sinozzz123目录下
+
+cp -a /home/wwwroot/sinozzz123/abc/* /home/wwwroot/sinozzz123
+
+3.把/home/wwwroot/sinozzz目录复制到/home/wwwroot/sinozzz123目录下，即把sinozzz复制变成sinozzz123的子目录,变成/home/wwwroot/sinozzz123/sinozzz的路径
+
+cp -a /home/wwwroot/sinozzz /home/wwwroot/sinozzz123
+
+三、目录剪切
+
+1.使用mv命令剪切文件。
+
+如需要将/home/wwwroot/sinozzz123/music/目录下的1.mp3文件剪切到/home/wwwroot/sinozzz123/abc目录下，执行下面的命令即可：
+
+# mv /home/wwwroot/sinozzz123/music/1.mp3 /home/wwwroot/sinozzz123/abc
+
+2.使用mv命令剪切文件夹。
+
+把/home/wwwroot/sinozzz123/soft文件夹剪切到/home/wwwroot/sinozzz123/abc目录下
+
+# mv /home/wwwroot/sinozzz123/soft /home/wwwroot/sinozzz123/abc
+
+3.使用mv命令剪切文件夹和文件
+
+把/home/wwwroot/sinozzz123/photo/下的文件夹和文件剪切到/home/wwwroot/sinozzz123/abc目录下
+
+# mv /home/wwwroot/sinozzz123/photo/* /home/wwwroot/sinozzz123/abc
+
+四、目录重命名
+
+在linux下，移动文件跟重命名都是同一个命令，mv（就是move的意思）
+
+命令： mv 源文件名 目标文件名
+
+1.把/home/wwwroot/sinozzz123/index.htm重命名为/home/wwwroot/sinozzz123/index.html
+
+# mv /home/wwwroot/sinozzz123/index.htm /home/wwwroot/sinozzz123/index.html
+
+2.把/home/wwwroot/sinozzz123目录重命名为/home/wwwroot/sinozzz456
+
+# mv /home/wwwroot/sinozzz123 /home/wwwroot/sinozzz456
+
+五、目录删除
+
+linux删除目录很简单，很多人还是习惯用rmdir，不过一旦目录非空，就陷入深深的苦恼之中，现在使用rm -rf命令即可。
+
+直接rm就可以了，不过要加两个参数-rf
+
+即：rm -rf   目录名字
+
+-r 就是向下递归，不管有多少级目录，一并删除
+
+-f 就是直接强行删除，不作任何提示的意思
+
+1.删除文件使用实例：
+
+rm -f /home/wwwroot/sinozzz456/index.html
+
+将会强制删除/home/wwwroot/sinozzz456/index.html这个文件
+
+2.清空文件夹实例：
+
+rm -rf /home/wwwroot/sinozzz456/abc/*
+
+将会强制删除/home/wwwroot/sinozzz456/abc目录下所有文件、文件夹，保留/home/wwwroot/sinozzz456/abc目录
+
+3.删除文件夹实例：
+
+rm -rf /home/wwwroot/sinozzz456
+
+将会强制删除/home/wwwroot/sinozzz456目录以及其下所有文件、文件夹
+
+需要提醒的是：使用这个rm -rf的时候一定要格外小心，linux没有回收站的
+
+当然，rm还有更多的其他参数和用法，man rm就可以查看了
+
+如果是在/home/wwwroot/目录下进行操作，则可以省去每个命令的/home/wwwroot/部分
+
+4.压缩(zip)和解压(unzip)命令:
+
+我需要备份/home/wwwroot文件夹，但是由于wwwroot里面文件数目有几万个甚至更多，这个时候就需要用zip命令，先把wwwroot文件压缩后在传输：
+
+cd /wwwroot 把路径定位在wwwroot文件夹上面
+
+zip -r wwwroot.zip wwwrot 这样主把wwwroot下的所有文件及文件夹都打包了
+
+同样的道理，将压缩文件传到centos里面时，可以用unzip解压文件；列如，将/home/wwwroot.zip解压，就可以用如下命令：
+
+cd /home
+
+unzip wwwroot.zip
+
+　1. 我想把一个文件abc.txt和一个目录dir1压缩成为yasuo.zip：
+
+＃ zip -r yasuo.zip abc.txt dir1
+
+　2.我下载了一个yasuo.zip文件，想解压缩：
+
+# unzip yasuo.zip
+
+　3.我当前目录下有abc1.zip，abc2.zip和abc3.zip，我想一起解压缩它们：
+
+＃ unzip abc\?.zip
+
+注释：?表示一个字符，如果用*表示任意多个字符。
+
+　4.我有一个很大的压缩文件large.zip，我不想解压缩，只想看看它里面有什么：
+
+# unzip -v large.zip
+
+　5.我下载了一个压缩文件large.zip，想验证一下这个压缩文件是否下载完全了
+
+# unzip -t large.zip
+
+　6.我用-v选项发现music.zip压缩文件里面有很多目录和子目录，并且子目录中其实都是歌曲mp3文件，我想把这些文件都下载到第一级目录，而不是一层一层建目录：
+
+# unzip -j music.zip

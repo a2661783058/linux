@@ -1,0 +1,18 @@
+-----------------
+·设置共享文件夹：D:\IE_DownLoads\虚拟机管理
+·linux打开：cd /mnt/hgfs
+
+
+1.su root
+2.mkdir -p /usr/lib/jvm   创建jvm 目录
+3.tar zxvf /mnt/hgfsjdk-7u79-linux-x64.tar.gz  -C /usr/lib/jvm 解压目录
+4.mv /usr/lib/jvm/jdk1.7.0_79    /usr/lib/jvm/java7
+5.添加jdk7.0到系统环境变量
+	cp /etc/profile /etc/profile.bak    #备份
+	vi /etc/profile     #编辑,在最后添加下面的内容 
+
+	export JAVA_HOME=/usr/lib/jvm/java7
+	export JRE_HOME=${JAVA_HOME}/jre  
+	export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib  
+	export PATH=${JAVA_HOME}/bin:$PATH 
+6.source /etc/profile 　　　#使配置文件立即生效
